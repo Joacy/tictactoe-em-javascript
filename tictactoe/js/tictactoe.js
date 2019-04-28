@@ -24,6 +24,17 @@ const tic_tac_toe = {
         this.container_element = container;
     },
 
+    start: function(){
+        if(this.gameover == true){
+            this.tabuleiro.fill('');
+            this.gameover = false;
+            this.draw();
+        }
+        else{
+            alert("A PARTIDA AINDA NÃO TERMINOU");
+        }
+    },
+
     make_play: function(posicao){
         if(this.gameover){
             return false;

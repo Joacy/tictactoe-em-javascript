@@ -32,8 +32,36 @@ const tic_tac_toe = {
         if(this.tabuleiro[posicao] === ''){
             this.tabuleiro[posicao] = this.simbolos.options[this.simbolos.turn_index];
             this.draw();
-            this.simbolos.change();
+            let winning_sequences_index = this.check_winning_sequences(this.simbolos.options[this.simbolos.turn_index]);
+
+            if(winning_sequences_index >= 0){
+                this.game_is_over();
+            }
+            else{
+                this.simbolos.change();
+            }
+            return true;
         }
+        else{
+            return false;
+        }
+    },
+
+    game_is_over: function(){
+        this.gameover = true;
+        console.log("GAME OVER");
+    },
+
+    check_winning_sequences: function(simbolo){
+        for(i in this.winning_sequences){
+            if(this.tabuleiro[this.winning_sequences[i][0]] == simbolo &&
+                this.tabuleiro[this.winning_sequences[i][1]] == simbolo &&
+                this.tabuleiro[this.winning_sequences[i][2]] == simbolo){
+                    console.log('Sequência Vencedora: '+ i);
+                    return i;
+            }
+        };
+        return -1;
     },
 
     draw: function () {
